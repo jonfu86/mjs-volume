@@ -185,6 +185,7 @@ exports.Scene = Target.specialize( {
                 this.totalBufferSize =  loader.totalBufferSize;
                 this.glTFElement = scene;
                 this.status = "loaded";
+                console.log(this.glTFElement);
                 console.log("scene loaded:"+this._path);
             }.bind(this);
 
@@ -223,7 +224,8 @@ exports.Scene = Target.specialize( {
                 if ((value.indexOf(".gltf") === -1) && (value.indexOf(".json") === -1))
                     return;
             }
-
+            console.log(value, "path function value");
+            console.log(this._path);
             if (value !== this._path) {
                 this._path = value;
                 if (value == null) {
@@ -260,7 +262,7 @@ exports.Scene = Target.specialize( {
                 var sceneResourceLoader = Object.create(SceneResourceLoader).init(this.glTFElement, webGLRenderer, this);
                 sceneResourceLoader.loadScene();
             }
-
+            console.log(sceneResourceLoader);
             return this._prepareToRenderDefer.promise;
         }
     },

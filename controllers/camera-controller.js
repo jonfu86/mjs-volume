@@ -139,7 +139,7 @@ exports.CameraController = Montage.specialize( {
         value: function() {
             var rootNode = this.node.glTFElement;
             this.sceneBBox =  rootNode.getBoundingBox(true);
-
+            console.log(rootNode, "rootNode has no bounding box");
             this._computeInitialDistance();
         }
     },
@@ -190,6 +190,8 @@ exports.CameraController = Montage.specialize( {
             var targetPosition;
             var rootNode = this.node.glTFElement;
             var sceneBBox =  this.sceneBBox;
+            console.log(sceneBBox, "sceneBBox doesnt exist");
+
             targetPosition = [
                 (sceneBBox[0][0] + sceneBBox[1][0]) / 2,
                 (sceneBBox[0][1] + sceneBBox[1][1]) / 2,

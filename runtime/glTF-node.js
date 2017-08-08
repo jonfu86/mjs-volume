@@ -123,9 +123,10 @@ var glTFNode = exports.glTFNode = Object.create(Base, {
                     }
                     return null;
                 }, true, ctx);
-
+                
                 return hierarchicalBBOX;
             } else {
+                console.log(this.boundingBox, "this.boundingBox");
                 return this.boundingBox;
             }
         }
@@ -140,11 +141,13 @@ var glTFNode = exports.glTFNode = Object.create(Base, {
     boundingBox: {
         enumerable: true,
         get: function() {
+            console.log("computing bounding box")
             this._computeBBOXIfNeeded();
             return this._boundingBox;
         },
         // we let the possibility to override by hand the bounding volume.
         set: function(value) {
+            console.log(value, "this._boundingBox");
             this._boundingBox = value;
         }
     },
