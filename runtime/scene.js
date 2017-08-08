@@ -179,6 +179,7 @@ exports.Scene = Target.specialize( {
 
     _loadScene: {
         value: function() {
+            console.log("hit this._loadScene");
             var self = this;
             var readerDelegate = {};
             readerDelegate.loadCompleted = function (scene) {
@@ -225,7 +226,6 @@ exports.Scene = Target.specialize( {
                     return;
             }
             console.log(value, "path function value");
-            console.log(this._path);
             if (value !== this._path) {
                 this._path = value;
                 if (value == null) {
@@ -239,6 +239,7 @@ exports.Scene = Target.specialize( {
                             this._pendingLoading = true;
                         }
                     } else {
+                        console.log("hit this._loadScene");
                         this._loadScene();
                     }
                 }
@@ -262,7 +263,6 @@ exports.Scene = Target.specialize( {
                 var sceneResourceLoader = Object.create(SceneResourceLoader).init(this.glTFElement, webGLRenderer, this);
                 sceneResourceLoader.loadScene();
             }
-            console.log(sceneResourceLoader);
             return this._prepareToRenderDefer.promise;
         }
     },

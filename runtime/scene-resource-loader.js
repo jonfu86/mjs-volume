@@ -65,7 +65,7 @@ exports.SceneResourceLoader = Object.create(ResourceLoader, {
                     }
                     return null;
                 }, true, null);
-
+            
                 var meshResourceLoader = Object.create(MeshResourceLoader).init(meshesSet, self.webGLRenderer, this);
                 meshResourceLoader.loadMeshes();
             }

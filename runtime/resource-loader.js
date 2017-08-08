@@ -51,6 +51,7 @@ exports.ResourceLoader = Object.create(Object.prototype, {
             } else {
                 //console.log("loaded:"+trackedId);
                 delete this._trackedIds[trackedId];
+                console.log(this._trackedIds);
             }
         }
     }

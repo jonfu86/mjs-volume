@@ -212,6 +212,7 @@ exports.RuntimeTFLoader = Object.create(glTFParser, {
                 description.byteOffset = 0;
 
             this.storeEntry(entryID, description, description);
+
         }
     },
 
@@ -253,7 +254,7 @@ exports.RuntimeTFLoader = Object.create(glTFParser, {
             for (var i = 0 ; i < primitivesDescription.length ; i++) {
                 var primitiveDescription = primitivesDescription[i];
 
-                if (primitiveDescription.primitive === WebGLRenderingContext.prototype.TRIANGLES) {
+                if ((primitiveDescription.primitive === "TRIANGLES") || (primitiveDescription.primitive === WebGLRenderingContext.prototype.TRIANGLES)) {
                     var primitive = Object.create(Primitive).init();
 
                     //read material
@@ -262,11 +263,12 @@ exports.RuntimeTFLoader = Object.create(glTFParser, {
 
                     mesh.primitives.push(primitive);
 
-                    var attributes = primitiveDescription.attributes;
-                    var allSemantics = Object.keys(attributes);
+                    // var attributes = primitiveDescription.semantics || primitiveDescription.attributes;
+                    var semantics = primitiveDescription.semantics;
+                    var allSemantics = Object.keys(semantics);
 
                     allSemantics.forEach( function(semantic) {
-                        var attributeID = attributes[semantic];
+                        var attributeID = semantics[semantic];
                         var attributeEntry = this.getEntry(attributeID);
 
                             primitive.addVertexAttribute( { 
@@ -724,6 +726,7 @@ exports.RuntimeTFLoader = Object.create(glTFParser, {
                 console.log("WARNING: entry:"+id+" is already stored, overriding");
             }
             this._entries[id] = { "id" : id , "entry" : entry, "description" : description };
+            // console.log(this._entries);
             return id;
         }
     },
@@ -731,7 +734,8 @@ exports.RuntimeTFLoader = Object.create(glTFParser, {
     getEntry: {
         enumerable: false,
         value: function(entryID) {
-            entryID = entryID + this.loaderContext();
+            // console.log(entryID);
+            entryID += this.loaderContext();
             return this._entries ? this._entries[entryID] : null;
         }
     }

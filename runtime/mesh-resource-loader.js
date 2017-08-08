@@ -32,11 +32,12 @@ exports.MeshResourceLoader = Object.create(ResourceLoader, {
 
             var ids = this._trackedIds 
                 ? Object.keys(this._trackedIds)
-                : null;
+                : [];
             if (ids) {
                 if (ids.length == 0) {
                     if (this.delegate) {
                         if (this.delegate.meshesDidLoad) {
+                            console.log("meshes did Load");
                             //FIXME: stop being an observer here
                             this.delegate.meshesDidLoad(this.meshes);
                         }
@@ -48,7 +49,7 @@ exports.MeshResourceLoader = Object.create(ResourceLoader, {
 
     resourceAvailable: {
         value: function(resourceId) {
-            //console.log("resource available:" + resourceId);
+            // console.log("resource available:" + resourceId);
 
             this._removeTrackedId(resourceId);
             this.fireMeshesDidLoadIfNeeded();
@@ -149,7 +150,6 @@ exports.MeshResourceLoader = Object.create(ResourceLoader, {
 
     _trackMesh: {
         value: function(mesh, resources, webGLRenderer) {
-
             mesh.primitives.forEach( function(primitive) {
                 this._trackTexturesFromMaterial(primitive.material, resources.textures);
                 this._trackIndicesFromPrimitive(primitive, resources.allIndices);
@@ -182,6 +182,7 @@ exports.MeshResourceLoader = Object.create(ResourceLoader, {
 
             this._trackMeshes(resources);
             this._fetchAllResources(resources, this.webGLRenderer);
+            console.log(resources, "resources");
         }
     },
 

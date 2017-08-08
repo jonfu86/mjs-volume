@@ -75,7 +75,7 @@
                     "indices": "indices_20",
                     "material": "material.0",
                     "primitive": 4,
-                    "attributes": {
+                    "semantics": {
                         "POSITION": "attribute_22"
                     }
                 }

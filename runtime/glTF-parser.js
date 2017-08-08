@@ -66,7 +66,7 @@ var global = window;
 }(this, function (root) {
     "use strict";
 
-    var categoriesDepsOrder = ["buffers", "bufferViews", "images",  "videos", "samplers", "textures", "shaders", "programs", "techniques", "materials", "accessors", "meshes", "cameras", "lights", "skins", "nodes", "scenes", "animations"];
+    var categoriesDepsOrder = ["buffers", "bufferViews", "images",  "videos", "samplers", "textures", "shaders", "programs", "techniques", "materials", "indices", "accessors", "attributes", "meshes", "cameras", "lights", "skins", "nodes", "scenes", "animations"];
 
     var glTFParser = Object.create(Object.prototype, {
 
@@ -210,7 +210,9 @@ var global = window;
                     "scenes" : this.handleScene,
                     "images" : this.handleImage,
                     "animations" : this.handleAnimation,
+                    "indices": this.handleAccessor,
                     "accessors" : this.handleAccessor,
+                    "attributes": this.handleAccessor,
                     "skins" : this.handleSkin,
                     "samplers" : this.handleSampler,
                     "textures" : this.handleTexture,
